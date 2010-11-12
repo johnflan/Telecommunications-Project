@@ -1,12 +1,12 @@
 \section{VoIP Standards}
 
-Contrary to common belief VoIP is not a single protocol or protocol stack but a collection of technologies that maybe be assembled together to provide voice-like-data over the IP protocol. Simpler VoIP implementations concern themselves with the session and presentation layers of the OSI seven layer model, as illustrated. But when scaling this technology across enterprise or internet sized systems many deeper grained issues begin to appear such as fault tolerance, security, latency, mobility and quality of service.
+Contrary to common belief VoIP is not a single protocol or protocol stack but a collection of technologies that maybe be assembled together to provide real-time voice, video and data over a packet switched data network. Simpler VoIP implementations concern themselves with the session and presentation layers of the OSI seven layer model, as illustrated. But when scaling this technology across enterprise or internet sized systems many deeper grained issues begin to appear such as fault tolerance, security, latency, mobility and quality of service. Below we will examine three of the most common VoIP standards/platforms.
 \begin{center}
 	\includegraphics[width=2.5in]{images/simple_voip_protocol.jpg}
 \end{center}
 
 \subsection{H.323 - Packet-based multimedia communications systems}
-A standard defined by the International Telecommunication Union (ITU) and was initially published in 1996\cite{website:itu_h323} the same month the SIP draft was published and was the first standards based VoIP stack\cite{website:packetizer_h323}. This standard encapsulates a number of ITU-T and IETF protocols used in the transmission of voice, video and data over a packet switched network.
+A standard defined by the International Telecommunication Union (ITU) and was initially published in 1996\cite{website:itu_h323} and was the first standards based VoIP stack\cite{website:packetizer_h323}. This standard encapsulates a number of ITU-T and IETF protocols used in the transmission of voice, video and data over a packet switched network.
 
 The standard consists of a number of classes of components, below is a breakdown and description of these elements:
 
@@ -42,18 +42,20 @@ The protocol is only involved in the signaling portion of a VoIP session, the de
 
 Unlike H.323 the design goal of SIP was to provide a signaling and call setup protocol and not to rigorously define all the potential features of the protocol, while offering expandability to offer features far beyond a traditional PSTN network. Depending on specific implementation SIP can be peer-to-peer, enabling the creation of a scalable and decentralised network.
 
-Below you can see an example of the SIP architecture, communication is initiated using a SIP server but the actual media transmission is on a peer-to-peer basis, with only external lookups for authentication and authorisation.
+Below you can see an example of the SIP architecture, communication is initiated using a SIP server but the actual media transmission is on a peer-to-peer basis, with only external lookups for authentication, authorisation and user lookup/discovery.
 
 \begin{center}
 	\includegraphics[width=3in]{images/SIP_Architecture.jpg}
 \end{center}
 
-Proponents of SIP distinguish the protocol from existing VoIP protocols such as H.323 to SIP’s roots laying in IP and being governed by the IETF and not by the telecommunications industry. H.323 is the more mature standard at this point but lacks in flexibility, for example at does not support presence information. SIP appears to be gaining more deployments in the corporate environment, but has issues with interoperability due to vendor specific additions.
+Proponents of SIP distinguish the protocol from existing VoIP protocols such as H.323 to SIP’s roots laying in IP and being governed by the IETF and not by the telecommunications industry. H.323 is the more mature standard at this point but lacks in flexibility, for example it does not support presence information. SIP appears to be gaining more deployments in the corporate environment, but has issues with interoperability due to vendor specific additions.
 
 \subsection{Skype}
-Skype unlike H.323 and SIP is a closed source propriety protocol, network and business model. Due to the nature of Skype much is unknown about the details of the protocol, but considering the usage numbers mentioned earlier in this paper omitting an overview of what is known about the Skype protocol would leave this document lacking.
+Skype unlike H.323 and SIP is a closed source propriety protocol, network and business model. Due to the nature of Skype complete details of the protocol remain undisclosed but due to research efforts the operation of the system is largely understood, considering the usage numbers mentioned earlier in this paper omitting an overview of what is known about the Skype protocol would leave this document lacking.
 
-The system is designed as a peer-to-peer network which allows the company to operate a small core network of login servers, reducing their bandwidth requirements and aiding in maintaining a high degree of uptime. The remainder of the network comprises of normal Skype clients, these clients have two operating modes node and super-node. Below is an architectural diagram of a Skype based network.
+The system is designed as a peer-to-peer network which allows the company to operate a small core network of login servers, reducing their bandwidth requirements and aiding in maintaining a high degree of uptime. The remainder of the network comprises of Skype clients, these clients have two operating modes, either as a node or a super-node. 
+
+Below is an architectural diagram of a Skype based network.
 
 \begin{center}
 	\includegraphics[width=2.5in]{images/Skype_network2.png}
@@ -61,9 +63,9 @@ The system is designed as a peer-to-peer network which allows the company to ope
 
 Any node with a public IP address having sufficient CPU, memory, and network bandwidth is a candidate to become a super node\cite{website:BasetSchulzrinne}. These super nodes may relay communications for regular nodes located behind a NAT or Firewall configuration, which is a common issue for many peer-to-peer networks. For a regular node to connect to to the network it must register itself with the login servers and connect to a super-node.
 
-With a peer-to-peer approach such as this authentication and privacy become important elements to the protocol. As we have already discussed all authentication is managed via the Skype central login servers, Skype ensures privacy in the channel between two or more communicating users by transparently encrypting the data stream. For this encryption the protocol uses RSA 1024bit for authentication, RC4 for signaling and 256bit AES for VoIP, offering the user a quite reasonable level of security\cite{website:Fabrice05}. 
+With a peer-to-peer approach such as this, authentication and privacy become important elements to the protocol. As we have already discussed all authentication is managed via the Skype central login servers, Skype ensures privacy in the channel between two or more communicating users by transparently encrypting the data stream. For this encryption the system uses RSA 1024bit for authentication, RC4 for signaling and 256bit AES for VoIP, offering the user a quite reasonable level of security\cite{website:Fabrice05}. 
 
-Skype recently submitted their Skype SILK wideband audio codec to the IETF for standardisation\cite{website:IETFSILK10}, but the protocol is also believed to use G.729 and SVOPC in transmission of audio. For video transmission it is believed that Skype utilise VP7 from On2 Technologies, but since Google’s acquisition of the company and the removal of their website its impossible to confirm this.
+Skype recently submitted their Skype SILK wideband audio codec to the IETF for standardisation \cite{website:IETFSILK10}, but the Skype is also believed to use G.729 and SVOPC in transmission of audio. For video transmission it is believed that Skype utilises VP7 from On2 Technologies, but since Google’s acquisition of the company and the removal of their website its impossible at this point to confirm this.
 
-While the Skype protocol may not be as all encompassing as H.323 and SIP it feature set is large enough to be positioned as a viable VoIP alternative. It has support for voice, video, data and text messaging as well as conferencing, mobile usage and presence information. And offering an interesting third architectural option for a VoIP implementation.
+While the Skype protocol may not be as all encompassing as H.323 and SIP it feature set is large enough to be positioned as a viable VoIP option. It has support for voice, video, data and text messaging as well as conferencing, mobile usage and presence information. And offering an interesting third architectural option in its useage of super-nodes for a VoIP implementation.
 
