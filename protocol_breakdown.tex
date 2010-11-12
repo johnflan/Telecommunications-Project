@@ -2,7 +2,7 @@
 
 Contrary to common belief VoIP is not a single protocol or protocol stack but a collection of technologies that maybe be assembled together to provide voice-like-data over the IP protocol. Simpler VoIP implementations concern themselves with the session and presentation layers of the OSI seven layer model, as illustrated. But when scaling this technology across enterprise or internet sized systems many deeper grained issues begin to appear such as fault tolerance, security, latency, mobility and quality of service.
 \begin{center}
-	\includegraphics[width=3in]{images/simple_voip_protocol.jpg}
+	\includegraphics[width=2.5in]{images/simple_voip_protocol.jpg}
 \end{center}
 
 \subsection{H.323 - Packet-based multimedia communications systems}
@@ -28,13 +28,27 @@ From this brief overview of the standard it is quite clear to see that H.323 is 
 One criticism of this standard is its complexity due to its rigid specification for areas of the standard, which has slowed the deployment of these H.323 networks.
 
 \subsection{SIP - Session Initiation Protocol}
-Positioned as an alternative standard, the initial SIP draft document was published during the same period as the first revision of the H.323 standard in 1996. The SIP signaling protocol is published by a working group of the IETF (Internet Engineering Task Force), and due to this affiliation the standard relies much more heavily on existing internet protocols such as HTTP, in contrast H.323 utilises ISDN Q.931 protocol for signaling as well as numerous other telecommunication industry protocols.
+The initial SIP draft document was published during the same period as the first revision of the H.323 standard was published in 1996. The SIP signaling protocol is published by a working group of the IETF (Internet Engineering Task Force), and due to this affiliation the standard relies much more heavily on existing internet protocols such as HTTP, in contrast H.323 utilises ISDN Q.931 protocol for signaling as well as numerous other telecommunication industry protocols.
 
 SIP is regarded as a much simpler protocol when compared to H.323\cite{paper:miroslavvozna}, while maintaining a somewhat similar feature set\cite{paper:SchulzrinnRosenber} when communicating over IP.  The IETF approach to telephony signaling reuses many mechanisms from HTTP including authentication, encoding and error codes.
 
 \begin{center}
 	\includegraphics[width=3in]{images/sip_protocol_suite.png}
 \end{center}
+
+SIP was designed to control unicast or multicast multimedia communication sessions over IP, example applications of the protocol would include voice and video streaming, conferencing, online gaming and instant messaging to name a few.
+
+The protocol is only involved in the signaling portion of a VoIP session, the design of the protocol borrows many elements from the HTTP protocol, utilising its request/response model and the packet header is largely the same. For the transmission most typically UDP or TCP are used to connect to other SIP endpoints and encryption is provided utilising TLS (Transaction Layer Security) the same mechanism used to secure HTTP transactions.
+
+Unlike H.323 the design goal of SIP was to provide a signaling and call setup protocol and not to rigorously define all the potential features of the protocol, while offering expandability to offer features far beyond a traditional PSTN network. Depending on specific implementation SIP can be peer-to-peer, enabling the creation of a scalable and decentralised network.
+
+Below you can see an example of the SIP architecture, communication is initiated using a SIP server but the actual media transmission is on a peer-to-peer basis, with only external lookups for authentication and authorisation.
+
+\begin{center}
+	\includegraphics[width=3in]{images/SIP_Architecture.jpg}
+\end{center}
+
+Proponents of SIP distinguish the protocol from existing VoIP protocols such as H.323 to SIP’s roots laying in IP and being governed by the IETF and not by the telecommunications industry. H.323 is the more mature standard at this point but lacks in flexibility, for example at does not support presence information. SIP appears to be gaining more deployments in the corporate environment, but has issues with interoperability due to vendor specific additions.
 
 \subsection{Skype}
 Skype unlike H.323 and SIP is a closed source propriety protocol, network and business model. Due to the nature of Skype much is unknown about the details of the protocol, but considering the usage numbers mentioned earlier in this paper omitting an overview of what is known about the Skype protocol would leave this document lacking.
